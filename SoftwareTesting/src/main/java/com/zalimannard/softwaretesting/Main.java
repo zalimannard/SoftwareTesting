@@ -23,6 +23,7 @@ public class Main
         
         WebElement confirmButton = webDriver.findElement(By.xpath("//*[@id=\"eu_enter\"]/input[3]"));
         confirmButton.click();
+        System.out.println("FFF" + webDriver.getCurrentUrl());
         
         WebElement homeButton = webDriver.findElement(By.xpath("//*[@id=\"page\"]/header/a[2]/i"));
         homeButton.click();
