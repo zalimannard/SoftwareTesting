@@ -1,4 +1,5 @@
 
+import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -23,6 +24,7 @@ public class JUnitTest
     public static void setup()
     {
         _webDriver = new ChromeDriver();
+        _webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         _mainPage = new MainPage(_webDriver);
         _menuOfBlocks = new MenuOfBlocks(_webDriver);        
         _menuOfBlocks = new MenuOfBlocks(_webDriver);
