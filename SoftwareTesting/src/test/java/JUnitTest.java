@@ -1,5 +1,6 @@
 
 
+import static com.codeborne.selenide.Selenide.open;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,28 +22,8 @@ public class JUnitTest
     private static FileInputStream _fileInputStream;
     private static Properties _properties = new Properties();
 
-    public static WebDriver _webDriver;
-    public static MainPage _mainPage;
-    public static MenuOfBlocks _menuOfBlocks;
-    public static AboutMe _aboutMe;
-    public static AcademicPerformance _academicPerformance;
-    public static AcademicPerformanceDigitalTranscript _academicPerformanceDigitalTranscript;
-
     @BeforeClass
     public static void setup()
-    {
-        _webDriver = new ChromeDriver();
-        _webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        _mainPage = new MainPage(_webDriver);
-        _menuOfBlocks = new MenuOfBlocks(_webDriver);
-        _menuOfBlocks = new MenuOfBlocks(_webDriver);
-        _aboutMe = new AboutMe(_webDriver);
-        _academicPerformance = new AcademicPerformance(_webDriver);
-        _academicPerformanceDigitalTranscript = new AcademicPerformanceDigitalTranscript(_webDriver);
-    }
-
-    @Before
-    public void loadMainUrl()
     {
         try
         {
@@ -57,39 +38,44 @@ public class JUnitTest
         {
             Logger.getLogger(AboutMe.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
-        _webDriver.get(_properties.getProperty("pageMain"));
+    @Before
+    public void loadMainUrl()
+    {
+        open(_properties.getProperty("pageMain"));
     }
 
     @Test
     public void checkAboutMe()
     {
-        _mainPage.clickPersonalAccount();
-        _mainPage.enterUserName(_properties.getProperty("login"));
-        _mainPage.enterPassword(_properties.getProperty("password"));
-        _mainPage.clickLogin();
-        _menuOfBlocks.clickAboutMe();
-        //Строка для падения теста
-        //_webDriver.findElement(By.id("ABOBA"));
-        assertTrue(_aboutMe.atPage());
+        MainPage mainPage = new MainPage();
+        MenuOfBlocks menuOfBlocks = new MenuOfBlocks();
+        AboutMe aboutMe = new AboutMe();
+        
+        mainPage.clickPersonalAccount();
+        mainPage.enterUserName(_properties.getProperty("login"));
+        mainPage.enterPassword(_properties.getProperty("password"));
+        mainPage.clickLogin();
+        menuOfBlocks.clickAboutMe();
+        assertTrue(aboutMe.atPage());
     }
 
     @Test
     public void checkAcademicPerformance()
     {
-        _mainPage.clickPersonalAccount();
-        _mainPage.enterUserName(_properties.getProperty("login"));
-        _mainPage.enterPassword(_properties.getProperty("password"));
-        _mainPage.clickLogin();
-        _menuOfBlocks.clickAcademicPerformance();
-        _academicPerformance.clickAcademicPerformanceDigitalTranscript();
-        assertTrue(_academicPerformanceDigitalTranscript.atPage());
-    }
-
-    @AfterClass
-    public static void tearDown()
-    {
-        _webDriver.quit();
+        MainPage mainPage = new MainPage();
+        MenuOfBlocks menuOfBlocks = new MenuOfBlocks();
+        AcademicPerformance academicPerformance = new AcademicPerformance();
+        AcademicPerformanceDigitalTranscript academicPerformanceDigitalTranscript = new AcademicPerformanceDigitalTranscript();
+    
+        mainPage.clickPersonalAccount();
+        mainPage.enterUserName(_properties.getProperty("login"));
+        mainPage.enterPassword(_properties.getProperty("password"));
+        mainPage.clickLogin();
+        menuOfBlocks.clickAcademicPerformance();
+        academicPerformance.clickAcademicPerformanceDigitalTranscript();
+        assertTrue(academicPerformanceDigitalTranscript.atPage());
     }
 }
 

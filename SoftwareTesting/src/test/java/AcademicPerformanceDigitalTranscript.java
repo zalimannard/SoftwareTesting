@@ -1,25 +1,21 @@
 
 
+import com.codeborne.selenide.WebDriverRunner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.openqa.selenium.WebDriver;
 
 
 public class AcademicPerformanceDigitalTranscript
 {
     private FileInputStream _fileInputStream;
     private Properties _properties = new Properties();
-    
-    private WebDriver _webDriver;
 
-    public AcademicPerformanceDigitalTranscript(WebDriver webDriver)
+    public AcademicPerformanceDigitalTranscript()
     {
-        this._webDriver = webDriver;
-        
         try
         {
             _fileInputStream = new FileInputStream(Props.PATH_TO_PROPERTIES);
@@ -37,8 +33,7 @@ public class AcademicPerformanceDigitalTranscript
 
     public boolean atPage()
     {
-        String currentUrl = _webDriver.getCurrentUrl();
-        return (currentUrl.equals(_properties.getProperty("pageAcademicPerformanceDigitalTranscript")));
+        return (WebDriverRunner.url().equals(_properties.getProperty("pageAcademicPerformanceDigitalTranscript")));
     }
 }
 

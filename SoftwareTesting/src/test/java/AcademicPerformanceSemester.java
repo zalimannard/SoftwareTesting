@@ -1,25 +1,21 @@
 
 
+import com.codeborne.selenide.WebDriverRunner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.openqa.selenium.WebDriver;
 
 
 public class AcademicPerformanceSemester
 {
     private FileInputStream _fileInputStream;
     private Properties _properties = new Properties();
-    
-    private WebDriver _webDriver;
 
-    public AcademicPerformanceSemester(WebDriver webDriver)
+    public AcademicPerformanceSemester()
     {
-        this._webDriver = webDriver;
-        
         try
         {
             _fileInputStream = new FileInputStream(Props.PATH_TO_PROPERTIES);
@@ -37,8 +33,7 @@ public class AcademicPerformanceSemester
 
     public boolean atPage()
     {
-        String currentUrl = _webDriver.getCurrentUrl();
-        return (currentUrl.equals(_properties.getProperty("pageAcademicPerformanceSemester")));
+        return (WebDriverRunner.url().equals(_properties.getProperty("pageAcademicPerformanceSemester")));
     }
 }
 

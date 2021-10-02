@@ -1,5 +1,8 @@
 
 
+import com.codeborne.selenide.Selenide;
+import static com.codeborne.selenide.Selenide.$;
+import com.codeborne.selenide.WebDriverRunner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,20 +10,15 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 
 public class MainPage
 {
     private static FileInputStream _fileInputStream;
     private static Properties _properties = new Properties();
-    
-    private WebDriver _webDriver;
 
-    public MainPage(WebDriver webDriver)
+    public MainPage()
     {
-        this._webDriver = webDriver;
-        
         try
         {
             _fileInputStream = new FileInputStream(Props.PATH_TO_PROPERTIES);
@@ -38,38 +36,38 @@ public class MainPage
 
     public void enterUserName(String login)
     {
-        _webDriver.findElement(By.name("p_login")).sendKeys(login);
+        $(By.name("p_login")).val(login);
     }
 
     public void enterPassword(String password)
     {
-        _webDriver.findElement(By.name("p_pass")).sendKeys(password);
+        $(By.name("p_pass")).val(password);
     }
 
     public void clickPersonalAccount()
     {
-        _webDriver.findElement(By.id("top-panel")).click();
+        $(By.xpath("//*[@id=\"top-panel\"]/div[1]/div[1]/a")).click();
     }
 
     public void clickLogin()
     {
-        _webDriver.findElement(By.id("eu_enter")).submit();
+        $(By.xpath("//*[@id=\"eu_enter\"]/input[3]")).submit();
     }
 
     public void open()
     {
-        _webDriver.get("http://kpfu.ru");
+        Selenide.open(_properties.getProperty("pageMain"));
     }
 
     public boolean isLoginWindowOpened()
     {
-        return _webDriver.findElement(By.name("p_login")).isDisplayed();
+        
+        return $(By.name("p_login")).isDisplayed();
     }
 
     public boolean atPage()
     {
-        String currentUrl = _webDriver.getCurrentUrl();
-        return (currentUrl.equals(_properties.getProperty("pageMain")));
+        return (WebDriverRunner.url().equals(_properties.getProperty("pageMain")));
     }
 }
 
