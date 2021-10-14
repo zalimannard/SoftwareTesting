@@ -1,5 +1,6 @@
 
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import static com.codeborne.selenide.Selenide.$;
 import com.codeborne.selenide.WebDriverRunner;
@@ -36,12 +37,13 @@ public class MainPage
 
     public void enterUserName(String login)
     {
-        $(By.name("p_login")).val(login);
+        
+        $(By.name("p_login")).should(Condition.exist).val(login);
     }
 
     public void enterPassword(String password)
     {
-        $(By.name("p_pass")).val(password);
+        $(By.name("p_pass")).should(Condition.exist).val(password);
     }
 
     public void clickPersonalAccount()
@@ -51,7 +53,7 @@ public class MainPage
 
     public void clickLogin()
     {
-        $(By.xpath("//*[@id=\"eu_enter\"]/input[3]")).submit();
+        $(By.xpath("//*[@id=\"eu_enter\"]/input[3]")).shouldHave(Condition.value("Отправить")).click();
     }
 
     public void open()

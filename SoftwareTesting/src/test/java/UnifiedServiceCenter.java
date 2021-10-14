@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 import org.openqa.selenium.By;
 
 
-public class AcademicPerformance
+public class UnifiedServiceCenter
 {
     private FileInputStream _fileInputStream;
     private Properties _properties = new Properties();
 
-    public AcademicPerformance()
+    public UnifiedServiceCenter()
     {
         try
         {
@@ -32,30 +32,15 @@ public class AcademicPerformance
             Logger.getLogger(AboutMe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void clickAcademicPerformanceAnalytycs()
+    
+    public void clickDocuments()
     {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[9]/span")).click();
-    }
-
-    public void clickAcademicPerformanceDigitalTranscript()
-    {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[8]/span")).click();
-    }
-
-    public void clickAcademicPerformanceSemester()
-    {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[7]/span")).click();
+        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[8]")).click();
     }
     
-    public void clickUnifiedServiceCenter()
-    {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[4]")).click();
-    }
-
     public boolean atPage()
     {
-        return (WebDriverRunner.url().contains(_properties.getProperty("pageAcademicPerformance")));
+        return (WebDriverRunner.url().contains(_properties.getProperty("unifiedServiceCenter")));
     }
 }
 

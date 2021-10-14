@@ -2,22 +2,26 @@
 
 import static com.codeborne.selenide.Selenide.$;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 
 
-public class AcademicPerformance
+public class DocTemplates
 {
     private FileInputStream _fileInputStream;
     private Properties _properties = new Properties();
 
-    public AcademicPerformance()
+    public DocTemplates()
     {
+        
         try
         {
             _fileInputStream = new FileInputStream(Props.PATH_TO_PROPERTIES);
@@ -32,30 +36,29 @@ public class AcademicPerformance
             Logger.getLogger(AboutMe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void clickAcademicPerformanceAnalytycs()
+    
+    public String readPraktLeto()
     {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[9]/span")).click();
-    }
-
-    public void clickAcademicPerformanceDigitalTranscript()
-    {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[8]/span")).click();
-    }
-
-    public void clickAcademicPerformanceSemester()
-    {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[7]/span")).click();
+        File file = null;
+        String fileString = null;
+        try
+        {
+            file = $(By.xpath("//*[@id=\"tab1\"]/p[2]/a")).download();
+            fileString = FileUtils.readFileToString(file, "Windows-1251");
+        }
+        catch (FileNotFoundException e)
+        {
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(DocTemplates.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fileString;
     }
     
-    public void clickUnifiedServiceCenter()
-    {
-        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[4]")).click();
-    }
-
     public boolean atPage()
     {
-        return (WebDriverRunner.url().contains(_properties.getProperty("pageAcademicPerformance")));
+        return (WebDriverRunner.url().contains(_properties.getProperty("docTemplates")));
     }
 }
 
