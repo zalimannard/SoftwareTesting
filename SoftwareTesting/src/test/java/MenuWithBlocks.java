@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 import org.openqa.selenium.By;
 
 
-public class MenuOfBlocks
+public class MenuWithBlocks
 {
     private static FileInputStream _fileInputStream;
     private static Properties _properties = new Properties();
 
-    public MenuOfBlocks()
+    public MenuWithBlocks()
     {
         try
         {
@@ -41,6 +41,11 @@ public class MenuOfBlocks
     public void clickAboutMe()
     {
         $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[2]/i")).click();
+    }
+
+    public void clickMessage()
+    {
+        $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[3]")).click();
     }
 
     public boolean atPage()

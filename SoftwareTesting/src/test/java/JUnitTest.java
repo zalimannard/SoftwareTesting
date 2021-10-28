@@ -1,7 +1,5 @@
 
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.FileDownloadMode;
 import static com.codeborne.selenide.Selenide.open;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -9,10 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.junit.AfterClass;
+
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -56,14 +53,14 @@ public class JUnitTest
     public void checkAboutMe()
     {
         MainPage mainPage = new MainPage();
-        MenuOfBlocks menuOfBlocks = new MenuOfBlocks();
+        MenuWithBlocks menuWithBlocks = new MenuWithBlocks();
         AboutMe aboutMe = new AboutMe();
         
         mainPage.clickPersonalAccount();
         mainPage.enterUserName(_properties.getProperty("login"));
         mainPage.enterPassword(_properties.getProperty("password"));
         mainPage.clickLogin();
-        menuOfBlocks.clickAboutMe();
+        menuWithBlocks.clickAboutMe();
         assertTrue(aboutMe.atPage());
     }
 
@@ -71,7 +68,7 @@ public class JUnitTest
     public void checkAcademicPerformance()
     {
         MainPage mainPage = new MainPage();
-        MenuOfBlocks menuOfBlocks = new MenuOfBlocks();
+        MenuWithBlocks menuWithBlocks = new MenuWithBlocks();
         AcademicPerformance academicPerformance = new AcademicPerformance();
         AcademicPerformanceDigitalTranscript academicPerformanceDigitalTranscript = new AcademicPerformanceDigitalTranscript();
     
@@ -79,7 +76,7 @@ public class JUnitTest
         mainPage.enterUserName(_properties.getProperty("login"));
         mainPage.enterPassword(_properties.getProperty("password"));
         mainPage.clickLogin();
-        menuOfBlocks.clickAcademicPerformance();
+        menuWithBlocks.clickAcademicPerformance();
         academicPerformance.clickAcademicPerformanceDigitalTranscript();
         assertTrue(academicPerformanceDigitalTranscript.atPage());
     }
@@ -88,7 +85,7 @@ public class JUnitTest
     public void checkDocument()
     {
         MainPage mainPage = new MainPage();
-        MenuOfBlocks menuOfBlocks = new MenuOfBlocks();
+        MenuWithBlocks menuWithBlocks = new MenuWithBlocks();
         AcademicPerformance academicPerformance = new AcademicPerformance();
         AcademicPerformanceDigitalTranscript academicPerformanceDigitalTranscript = new AcademicPerformanceDigitalTranscript();
         UnifiedServiceCenter unifiedServiceCenter = new UnifiedServiceCenter();
@@ -99,7 +96,7 @@ public class JUnitTest
         mainPage.enterUserName(_properties.getProperty("login"));
         mainPage.enterPassword(_properties.getProperty("password"));
         mainPage.clickLogin();
-        menuOfBlocks.clickAcademicPerformance();
+        menuWithBlocks.clickAcademicPerformance();
         academicPerformance.clickUnifiedServiceCenter();
         unifiedServiceCenter.clickDocuments();
         documents.clickDocTemplates();
@@ -111,14 +108,14 @@ public class JUnitTest
     public void changeLkPhoto ()
     {
         MainPage mainPage = new MainPage();
-        MenuOfBlocks menuOfBlocks = new MenuOfBlocks();
+        MenuWithBlocks menuWithBlocks = new MenuWithBlocks();
         AboutMe aboutMe = new AboutMe();
         
         mainPage.clickPersonalAccount();
         mainPage.enterUserName(_properties.getProperty("login"));
         mainPage.enterPassword(_properties.getProperty("password"));
         mainPage.clickLogin();
-        menuOfBlocks.clickAboutMe();
+        menuWithBlocks.clickAboutMe();
         aboutMe.deletePhoto();
         aboutMe.setPhoto(_properties.getProperty("photo"));
         assertTrue(true);

@@ -37,26 +37,28 @@ public class AboutMe
         }
     }
     
-    @Step
+    @Step("Проверка, что файл удалился")
     public void deletePhoto()
     {
         $(By.xpath("//*[@id=\"info\"]/div/div[1]/div[1]/div[2]/div[2]")).should(Condition.exist).click();
         $(By.xpath("//*[@id=\"answer\"]/a[1]")).shouldBe(Condition.visible).click();
         Assert.assertTrue($(By.xpath("//*[@id=\"info\"]/div/div[1]/div[1]/div[1]/form/div[1]/input")).isDisplayed());
     }
-    
-    @Step
+
     public void setPhoto(String newPhoto)
     {
         $(By.xpath("//*[@id=\"under-slider-menu\"]/div/a[2]/i")).click();
         $(By.xpath("//*[@id=\"info\"]/div/div[1]/div[1]/div[1]/form/div[1]/input")).uploadFile(new File(newPhoto));
         $(By.xpath("//*[@id=\"info\"]/div/div[1]/div[1]/div[1]/form/div[2]/input")).click();
-        Assert.assertTrue($(By.xpath("//*[@id=\"info\"]/div/div[1]/div[1]/div[2]/div[2]")).isDisplayed());
+    }
+
+    public boolean isPhotoDisplayed()
+    {
+        return $(By.xpath("//*[@id=\"info\"]/div/div[1]/div[1]/div[2]/div[2]")).isDisplayed();
     }
     
     public boolean atPage()
     {
-        
         return (WebDriverRunner.url().contains(_properties.getProperty("pageAboutMe")));
     }
 }
